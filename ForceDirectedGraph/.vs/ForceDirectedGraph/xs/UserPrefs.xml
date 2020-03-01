@@ -1,0 +1,37 @@
+﻿<Properties StartupConfiguration="{DB5A81ED-EAE4-83C5-8FB9-03EC12A34DCF}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GraphController.cs">
+    <Files>
+      <File FileName="Assets/Scripts/Node.cs.cs" Line="21" Column="1" />
+      <File FileName="Assets/Scripts/Link.cs" Line="40" Column="2" />
+      <File FileName="Assets/Scripts/GraphController.cs" Line="7" Column="5" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="ForceDirectedGraph" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="GraphController.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="ForceDirectedGraph" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="7e73f6ba-aa13-4028-9ac5-9dc7d225d086" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
