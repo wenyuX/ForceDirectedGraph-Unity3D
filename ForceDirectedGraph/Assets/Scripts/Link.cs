@@ -20,8 +20,8 @@ public class Link : MonoBehaviour
         lineRenderer.material = new Material(Shader.Find("Self-Illumin/Diffuse"));
         
         
-        lineRenderer.startWidth = 0.3f;
-        lineRenderer.endWidth = 0.3f;
+        lineRenderer.startWidth = 0.1f;
+        lineRenderer.endWidth = 0.1f;
         lineRenderer.positionCount = 2;
         lineRenderer.SetPosition(0, new Vector3(0, 0, 0));
         lineRenderer.SetPosition(1, new Vector3(1, 0, 0));

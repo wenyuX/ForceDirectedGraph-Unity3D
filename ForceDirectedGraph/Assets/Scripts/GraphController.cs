@@ -38,12 +38,13 @@ public class GraphController : MonoBehaviour
     private static ILogger logger = Debug.unityLogger;
     private static string kTAG = "GraphController";
 
-    private float springK = 50f;
-    private float originalLen = 6f;
-    private float c = 30f;
+    private float springK = 5f;
+    private float originalLen = 10f;
+    private float c = 40f;
 
     private void LoadLayout()
     {
+        /*
         Node node1 = Instantiate(nodePrefab, new Vector3(-4, 0, 0), Quaternion.identity) as Node;
         Node node2 = Instantiate(nodePrefab, new Vector3(4, 0, 0), Quaternion.identity) as Node;
         nodes.Add(1,node1);
@@ -55,7 +56,8 @@ public class GraphController : MonoBehaviour
         link.target = nodes[2] as Node;
 
         links.Add(1,link);
-        /*
+        */
+        
         string dataJsonPath = Application.dataPath + "/Data/data.json";
         System.IO.StreamReader sr = new System.IO.StreamReader(dataJsonPath);
         string jsonStr = sr.ReadToEnd();
@@ -65,9 +67,9 @@ public class GraphController : MonoBehaviour
         System.Random rd = new System.Random();
         for (int i = 0; i < jsonDataClass.nodes.Length; i++)
         {
-            float x = rd.Next(1, 50);
-            float y = rd.Next(1, 50);
-            float z = rd.Next(1, 50);
+            float x = rd.Next(-20, 20);
+            float y = rd.Next(-20, 20);
+            float z = rd.Next(-20, 20);
             Node node = Instantiate(nodePrefab,new Vector3(x,y,z),Quaternion.identity) as Node;
             node.id = i;
             node.name = jsonDataClass.nodes[i].name;
@@ -89,7 +91,7 @@ public class GraphController : MonoBehaviour
             links.Add(link.id,link);
             linkCount++;
         }
-        */
+        
     }
     
     void Start()
@@ -102,6 +104,7 @@ public class GraphController : MonoBehaviour
 
     private void Update()
     {
+        /*
         Node node1 = nodes[1] as Node;
         Node node2 = nodes[2] as Node;
         node1.force = new Vector3(0,0,0);
@@ -119,6 +122,29 @@ public class GraphController : MonoBehaviour
         Vector3 coulombForce2 = -coulombForce1;
         node1.force += coulombForce1;
         node2.force += coulombForce2;
+        */
+        //Coulomb force
+        foreach(Node i in nodes.Values)
+        {
+            i.force = Vector3.zero;
+            foreach(Node j in nodes.Values)
+            {
+                if (i.id == j.id) continue;
+                Vector3 dis = i.transform.position - j.transform.position;
+                i.force += dis.normalized / (dis.magnitude * dis.magnitude) * c;
+            }
+        }
+        //Spring force
+        foreach(Link link in links.Values)
+        {
+            Node source = link.source;
+            Node target = link.target;
+            Vector3 dis = source.transform.position - target.transform.position;
+            Vector3 springForceToSource = (dis.magnitude - originalLen) * springK * -dis.normalized;
+            Vector3 springForceToTarget = -springForceToSource;
+            source.force += springForceToSource;
+            target.force += springForceToTarget;
+        } 
         
     }
 }
