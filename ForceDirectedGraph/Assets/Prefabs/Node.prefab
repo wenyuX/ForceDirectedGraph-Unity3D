@@ -3,8 +3,7 @@
 --- !u!1 &4173041507059769659
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 2617022443390790957, guid: 45de64774794144e98a3a40d654060d9,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
@@ -14,6 +13,7 @@ GameObject:
   - component: {fileID: 4173041507059769638}
   - component: {fileID: 4173041507059769637}
   - component: {fileID: 4173041507059769636}
+  - component: {fileID: 54534847803181868}
   m_Layer: 0
   m_Name: Node
   m_TagString: Untagged
@@ -24,8 +24,7 @@ GameObject:
 --- !u!4 &4173041507059769632
 Transform:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 5655208060935241622, guid: 45de64774794144e98a3a40d654060d9,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4173041507059769659}
@@ -39,8 +38,7 @@ Transform:
 --- !u!33 &4173041507059769639
 MeshFilter:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 8809502746719833970, guid: 45de64774794144e98a3a40d654060d9,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4173041507059769659}
@@ -48,8 +46,7 @@ MeshFilter:
 --- !u!23 &4173041507059769638
 MeshRenderer:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 6832513147094705666, guid: 45de64774794144e98a3a40d654060d9,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4173041507059769659}
@@ -86,8 +83,7 @@ MeshRenderer:
 --- !u!135 &4173041507059769637
 SphereCollider:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 4094452508400929131, guid: 45de64774794144e98a3a40d654060d9,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4173041507059769659}
@@ -100,8 +96,7 @@ SphereCollider:
 --- !u!114 &4173041507059769636
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114918043130778628, guid: 45de64774794144e98a3a40d654060d9,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4173041507059769659}
@@ -110,6 +105,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03429887b9e844a71b0a2e16933cdebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 
+  id: 0
   group: 0
-  nodeName: {fileID: 0}
+--- !u!54 &54534847803181868
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4173041507059769659}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

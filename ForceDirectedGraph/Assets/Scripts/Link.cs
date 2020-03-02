@@ -35,7 +35,7 @@ public class Link : MonoBehaviour
             lineRenderer.SetPosition(0, source.transform.position);
             lineRenderer.SetPosition(1, target.transform.position);
 
-            loaded = true;
+            //loaded = true;
         }
     }
 }

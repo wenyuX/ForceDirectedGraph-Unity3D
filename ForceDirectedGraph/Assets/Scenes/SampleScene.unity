@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f6dca06c3ad646fca3f423e54911327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodePrefab: {fileID: 114918043130778628, guid: 45de64774794144e98a3a40d654060d9,
+  nodePrefab: {fileID: 4173041507059769636, guid: 45de64774794144e98a3a40d654060d9,
     type: 3}
   linkPrefab: {fileID: 114968840672506316, guid: eb22190dffd604d119a45ca875a35c41,
     type: 3}
