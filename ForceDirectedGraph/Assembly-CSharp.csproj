@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\GraphController.cs" />
     <Compile Include="Assets\Scripts\Link.cs" />
     <Compile Include="Assets\Scripts\Node.cs" />

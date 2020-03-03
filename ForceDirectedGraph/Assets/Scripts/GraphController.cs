@@ -31,6 +31,7 @@ public class GraphController : MonoBehaviour
 
     private Hashtable nodes;
     private Hashtable links;
+    //private Hashtable linkSum;
     
     private int nodeCount = 0;
     private int linkCount = 0;
@@ -38,38 +39,48 @@ public class GraphController : MonoBehaviour
     private static ILogger logger = Debug.unityLogger;
     private static string kTAG = "GraphController";
 
-    private float springK = 5f;
-    private float originalLen = 10f;
-    private float c = 40f;
+    private float springK = 0.5f;
+    private float originalLen = 100f;
+    private float c = 5000f;
+
+    private float randomSign()
+    {
+        System.Random rd = new System.Random();
+        double tmp = rd.NextDouble();
+        if (tmp > 0.5) return 1;
+        return -1;
+    }
 
     private void LoadLayout()
     {
-        /*
-        Node node1 = Instantiate(nodePrefab, new Vector3(-4, 0, 0), Quaternion.identity) as Node;
-        Node node2 = Instantiate(nodePrefab, new Vector3(4, 0, 0), Quaternion.identity) as Node;
-        nodes.Add(1,node1);
-        nodes.Add(2,node2);
-
-        Link link = Instantiate(linkPrefab, new Vector3(0, 0, 0), Quaternion.identity) as Link;
-        link.id = 1;
-        link.source = nodes[1] as Node;
-        link.target = nodes[2] as Node;
-
-        links.Add(1,link);
-        */
-        
         string dataJsonPath = Application.dataPath + "/Data/data.json";
         System.IO.StreamReader sr = new System.IO.StreamReader(dataJsonPath);
         string jsonStr = sr.ReadToEnd();
         JsonDataClass jsonDataClass = JsonUtility.FromJson<JsonDataClass>(jsonStr);
 
-        
+        int[] linkSum = new int[jsonDataClass.nodes.Length];
+        for (int i = 0; i < linkSum.Length; i++) linkSum[i] = 0;
+
+        int maxLinkSum = 0;
+        for (int i=0;i<jsonDataClass.links.Length;i++)
+        {
+            int sourceIdx = jsonDataClass.links[i].source;
+            int targetIdx = jsonDataClass.links[i].target;
+            
+            linkSum[sourceIdx] +=1;
+            linkSum[targetIdx] += 1;
+        }
+        for (int i = 0; i < linkSum.Length; i++) if (linkSum[i] > maxLinkSum) maxLinkSum = linkSum[i];
+
         System.Random rd = new System.Random();
         for (int i = 0; i < jsonDataClass.nodes.Length; i++)
         {
-            float x = rd.Next(-20, 20);
-            float y = rd.Next(-20, 20);
-            float z = rd.Next(-20, 20);
+            int range = 5;
+            int idx = maxLinkSum - linkSum[i];
+            float x = randomSign()*idx+rd.Next(-range, range);
+            float y = randomSign()*idx+rd.Next(-range, range);
+            float z = randomSign()*idx+rd.Next(-range, range);
+            
             Node node = Instantiate(nodePrefab,new Vector3(x,y,z),Quaternion.identity) as Node;
             node.id = i;
             node.name = jsonDataClass.nodes[i].name;
@@ -91,7 +102,6 @@ public class GraphController : MonoBehaviour
             links.Add(link.id,link);
             linkCount++;
         }
-        
     }
     
     void Start()
@@ -104,25 +114,6 @@ public class GraphController : MonoBehaviour
 
     private void Update()
     {
-        /*
-        Node node1 = nodes[1] as Node;
-        Node node2 = nodes[2] as Node;
-        node1.force = new Vector3(0,0,0);
-        node2.force = new Vector3(0,0,0);
-        Vector3 dis = node1.transform.position - node2.transform.position;
-        Vector3 springForce1 = (dis.magnitude-originalLen) * springK * -dis.normalized;
-        Vector3 springForce2 = -springForce1;
-
-        node1.force = springForce1;
-        node2.force = springForce2;
-        logger.Log(kTAG, "node1 " + springForce1.ToString());
-        logger.Log(kTAG, "node2 " + springForce2.ToString());
-        
-        Vector3 coulombForce1 = dis.normalized / (dis.magnitude * dis.magnitude) * c;
-        Vector3 coulombForce2 = -coulombForce1;
-        node1.force += coulombForce1;
-        node2.force += coulombForce2;
-        */
         //Coulomb force
         foreach(Node i in nodes.Values)
         {
