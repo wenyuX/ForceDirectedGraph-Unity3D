@@ -31,7 +31,7 @@ public class GraphController : MonoBehaviour
 
     private Hashtable nodes;
     private Hashtable links;
-    //private Hashtable linkSum;
+    private Hashtable colors;
     
     private int nodeCount = 0;
     private int linkCount = 0;
@@ -39,8 +39,8 @@ public class GraphController : MonoBehaviour
     private static ILogger logger = Debug.unityLogger;
     private static string kTAG = "GraphController";
 
-    private float springK = 0.5f;
-    private float originalLen = 100f;
+    private float springK = 50f;
+    private float originalLen = 10f;
     private float c = 5000f;
 
     private float randomSign()
@@ -58,33 +58,21 @@ public class GraphController : MonoBehaviour
         string jsonStr = sr.ReadToEnd();
         JsonDataClass jsonDataClass = JsonUtility.FromJson<JsonDataClass>(jsonStr);
 
-        int[] linkSum = new int[jsonDataClass.nodes.Length];
-        for (int i = 0; i < linkSum.Length; i++) linkSum[i] = 0;
-
-        int maxLinkSum = 0;
-        for (int i=0;i<jsonDataClass.links.Length;i++)
-        {
-            int sourceIdx = jsonDataClass.links[i].source;
-            int targetIdx = jsonDataClass.links[i].target;
-            
-            linkSum[sourceIdx] +=1;
-            linkSum[targetIdx] += 1;
-        }
-        for (int i = 0; i < linkSum.Length; i++) if (linkSum[i] > maxLinkSum) maxLinkSum = linkSum[i];
-
+  
         System.Random rd = new System.Random();
         for (int i = 0; i < jsonDataClass.nodes.Length; i++)
         {
-            int range = 5;
-            int idx = maxLinkSum - linkSum[i];
-            float x = randomSign()*idx+rd.Next(-range, range);
-            float y = randomSign()*idx+rd.Next(-range, range);
-            float z = randomSign()*idx+rd.Next(-range, range);
-            
+            int range = 50;
+            float x = rd.Next(-range,range);
+            float y = rd.Next(-range, range);
+            float z = rd.Next(-range, range);
+
             Node node = Instantiate(nodePrefab,new Vector3(x,y,z),Quaternion.identity) as Node;
+          
             node.id = i;
             node.name = jsonDataClass.nodes[i].name;
             node.group = jsonDataClass.nodes[i].group;
+            node.GetComponent<MeshRenderer>().material.SetColor("_Color", (Color)colors[node.group]);
 
             nodes.Add(node.id, node);
             nodeCount++;
@@ -108,7 +96,20 @@ public class GraphController : MonoBehaviour
     {
         nodes = new Hashtable();
         links = new Hashtable();
+        colors = new Hashtable();
 
+        colors.Add(0,new Color(0.8f,0.25f,0.5f)); //Purple
+        colors.Add(1,new Color(0.25f, 0.8f, 1f)); //Light blue 
+        colors.Add(2,new Color(0,0.25f,0)); //Dark green
+        colors.Add(3, Color.gray);
+        colors.Add(4, new Color(0f, 0.25f, 0.5f)); //Dark blue
+        colors.Add(5, new Color(1f,0.25f,0.25f)); //Red
+        colors.Add(6, new Color(1,0.5f,0f)); //Orange
+        colors.Add(7, new Color(0.25f,0.8f,0.25f));
+        colors.Add(8, new Color(1,0.75f,0.25f)); // Yellow
+        colors.Add(9, new Color(0f,0,0f)); // Empty
+        colors.Add(10, new Color(1,0.8f,0.8f));
+        
         LoadLayout();
     }
 

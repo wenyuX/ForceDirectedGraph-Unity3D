@@ -8,7 +8,8 @@ public class Node : MonoBehaviour
     private int thrust=3;
     private float damp = 30f;
     private float gravity = 5f;
-    private float epsilon = 0f ;
+    private float epsilon = 1f ;
+    
 
     public int id;
     //public string name;
@@ -26,6 +27,10 @@ public class Node : MonoBehaviour
         force = new Vector3(0,0,0);
     }
 
+    private float abs(float x)
+    {
+        return x > 0 ? x : -x;
+    }
  
     void Update()
     {
@@ -33,12 +38,14 @@ public class Node : MonoBehaviour
         force += -rd.velocity * this.damp;
         force += -this.transform.position * this.gravity;
         if(this.name == "Child1")
-            logger.Log(this.kTAG, force.magnitude.ToString());
-        if (force.magnitude < this.epsilon)
+            logger.Log(this.kTAG, rd.velocity.magnitude.ToString());
+        
+        if (force.magnitude < this.epsilon && rd.velocity.magnitude < this.epsilon)
         {
             rd.velocity = Vector3.zero;
             return;
         }
+        
         rd.AddForce(force);
         //nodeName.transform.LookAt(Camera.main.transform);
         
