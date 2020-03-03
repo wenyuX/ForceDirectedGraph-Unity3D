@@ -81,7 +81,7 @@ public class GraphController : MonoBehaviour
         {
             Node source = nodes[jsonDataClass.links[i].source] as Node;
             Node target = nodes[jsonDataClass.links[i].target] as Node;
-            Link link = Instantiate(linkPrefab, new Vector3(0, 0, 0), Quaternion.identity) as Link;
+            Link link = Instantiate(linkPrefab, source.transform.position, Quaternion.identity) as Link;
             link.id = i;
             link.source = source;
             link.target = target;
@@ -98,16 +98,16 @@ public class GraphController : MonoBehaviour
         links = new Hashtable();
         colors = new Hashtable();
 
-        colors.Add(0,new Color(0.8f,0.25f,0.5f)); //Purple
-        colors.Add(1,new Color(0.25f, 0.8f, 1f)); //Light blue 
-        colors.Add(2,new Color(0,0.25f,0)); //Dark green
+        colors.Add(0,new Color(0.8f,0.25f,0.5f)); 
+        colors.Add(1,new Color(0.25f, 0.8f, 1f)); 
+        colors.Add(2,new Color(0,0.25f,0)); 
         colors.Add(3, Color.gray);
-        colors.Add(4, new Color(0f, 0.25f, 0.5f)); //Dark blue
-        colors.Add(5, new Color(1f,0.25f,0.25f)); //Red
-        colors.Add(6, new Color(1,0.5f,0f)); //Orange
+        colors.Add(4, new Color(0f, 0.25f, 0.5f)); 
+        colors.Add(5, new Color(1f,0.25f,0.25f)); 
+        colors.Add(6, new Color(1,0.5f,0f)); 
         colors.Add(7, new Color(0.25f,0.8f,0.25f));
-        colors.Add(8, new Color(1,0.75f,0.25f)); // Yellow
-        colors.Add(9, new Color(0f,0,0f)); // Empty
+        colors.Add(8, new Color(1,0.75f,0.25f)); 
+        colors.Add(9, new Color(0f,0,0f)); 
         colors.Add(10, new Color(1,0.8f,0.8f));
         
         LoadLayout();

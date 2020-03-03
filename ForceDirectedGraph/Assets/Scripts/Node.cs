@@ -12,9 +12,7 @@ public class Node : MonoBehaviour
     
 
     public int id;
-    //public string name;
     public int group;
-    //public TextMesh nodeName;
 
     private static ILogger logger = Debug.unityLogger;
     private string kTAG = "Node ";
@@ -26,28 +24,21 @@ public class Node : MonoBehaviour
         rd = this.GetComponent<Rigidbody>();
         force = new Vector3(0,0,0);
     }
-
-    private float abs(float x)
-    {
-        return x > 0 ? x : -x;
-    }
  
     void Update()
     {
         
         force += -rd.velocity * this.damp;
         force += -this.transform.position * this.gravity;
-        if(this.name == "Child1")
-            logger.Log(this.kTAG, rd.velocity.magnitude.ToString());
-        
+
+        /*
         if (force.magnitude < this.epsilon && rd.velocity.magnitude < this.epsilon)
         {
             rd.velocity = Vector3.zero;
             return;
         }
-        
+        */
         rd.AddForce(force);
-        //nodeName.transform.LookAt(Camera.main.transform);
         
     }
 }
